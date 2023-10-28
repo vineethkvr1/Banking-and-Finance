@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project1
+  labels:
+    app: project1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project1
+  template:
+    metadata:
+      labels:
+        app: project1
+    spec:
+      containers:
+      - name: project1-container
+        image: vineethkvr1/project1:latest
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankapp-project1-service1
+  labels:
+    app: project1
+spec:
+  selector:
+    app: project1
+
+  type: NodePort
+  ports:
+  - nodePort: 31111    
+    port: 8081
+    targetPort: 8081
