@@ -131,17 +131,19 @@ resource "aws_instance" "sadinstance2" {
   subnet_id = aws_subnet.mysubnet.id
   vpc_security_group_ids = [aws_security_group.mysg.id]
   key_name = "Mumbai"
-
-   tags = {
-    Name = "Infra Server"
-   }
-
+}
+  
 user_data = <<-EOF
 #!/bin/bash
-sudo apt update
-sudo apt install apache2 -y
-sudo service apache2 start
+sudo apt-get update -y
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo docker run -itd -p 8086:8081 vineethkvr1/project1:latest
+sudo docker start $(docker ps -aq)
 EOF
+ tags = {
+    Name = "Infra-Server"
+   }
 }
 
 
