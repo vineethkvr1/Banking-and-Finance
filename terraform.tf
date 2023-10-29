@@ -11,6 +11,7 @@ terraform {
 # Configure the AWS provider
 provider "aws" {
   region = "ap-south-1"
+profile= "terraform"
 }
 # Creating a VPC
 resource "aws_vpc" "proj-vpc" {
