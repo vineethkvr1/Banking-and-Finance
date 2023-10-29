@@ -11,7 +11,7 @@ terraform {
 # Configure the AWS provider
 provider "aws" {
   region = "ap-south-1"
-profile= "terraform"
+shared_credentials_file = "/home/devopsadmin/aws_credentials"
 }
 # Creating a VPC
 resource "aws_vpc" "proj-vpc" {
